@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.stage.Screen?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.TextArea?>
+<BorderPane fx:id="borderPane" prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.height}" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+    <fx:define>
+        <Screen fx:factory="getPrimary" fx:id="screen"/>
+    </fx:define>
+    <top>
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <MenuItem onAction="#onSave" text="Save" />
+                    <MenuItem onAction="#onLoad" text="Load" />
+                </Menu>
+
+            </MenuBar>
+
+            <ToolBar>
+                <HBox spacing="5">
+                    <VBox spacing="5">
+                        <Button fx:id="undoBtn" text="Undo" onAction="#undo" />
+                        <Button fx:id="redoBtn" text="Redo" onAction="#redo" />
+                        <Button fx:id="clearBtn" text="Clear" onAction="#onClear" />
+                    </VBox>
+                    <VBox spacing="10">
+                        <ComboBox fx:id="drawShape" value="Free Drawing">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Free Drawing"/>
+                                    <String fx:value="Line"/>
+                                    <String fx:value="Rectangle (Transparent)"/>
+                                    <String fx:value="Rectangle Fill"/>
+                                    <String fx:value="Circle (Transparent)"/>
+                                    <String fx:value="Circle"/>
+                                    <String fx:value="Text"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                        <CheckBox fx:id="eraser" text="Eraser" />
+                    </VBox>
+                    <VBox spacing="5">
+                        <ComboBox fx:id="brushSize" value="Small">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Small"/>
+                                    <String fx:value="Medium"/>
+                                    <String fx:value="Large"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                    </VBox>
+                    <HBox spacing="5">
+                        <VBox spacing="12">
+                            <Label text="Red" />
+                            <Label text="Green" />
+                            <Label text="Blue" />
+                            <Label text="Alpha" />
+                        </VBox>
+                        <VBox spacing="17">
+                            <Slider min="0" max="255"  fx:id="redSlider" snapToTicks="true" majorTickUnit="1" minorTickCount="0" blockIncrement="1" />
+                            <Slider min="0" max="255" fx:id="greenSlider" snapToTicks="true" majorTickUnit="1" minorTickCount="0" blockIncrement="1" />
+                            <Slider min="0" max="255" fx:id="blueSlider" snapToTicks="true" majorTickUnit="1" minorTickCount="0" blockIncrement="1" />
+                            <Slider min="0" max="1" fx:id="alphaSlider" snapToTicks="true" majorTickUnit="0.1" minorTickCount="0" blockIncrement="0.1" />
+                        </VBox>
+                        <VBox spacing="3">
+                            <TextField fx:id="redTF" />
+                            <TextField fx:id="greenTF" />
+                            <TextField fx:id="blueTF" />
+                            <TextField fx:id="alphaTF" />
+                        </VBox>
+                    </HBox>
+                    <TextArea wrapText="true" fx:id="addText" />
+                </HBox>
+            </ToolBar>
+
+        </VBox>
+    </top>
+
+    <center>
+        	<Canvas fx:id="canvas" height="${screen.visualBounds.height}" width="${screen.visualBounds.width}"  />
+    </center>
+
+</BorderPane>
